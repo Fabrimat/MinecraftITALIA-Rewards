@@ -75,21 +75,20 @@ public class ConfigManager {
         this.rewards = new ArrayList<>();
         ConfigurationSection rewardSection = config.getConfigurationSection("rewards");
         int i = 1;
-        while(rewardSection != null && rewardSection.getConfigurationSection(Integer.toString(i)) != null) {
-            ConfigurationSection tempConfig = rewardSection.getConfigurationSection(Integer.toString(i));
-
+        ConfigurationSection tempConfig;
+        while(rewardSection != null && (tempConfig = rewardSection.getConfigurationSection(Integer.toString(i))) != null) {
             Material tempMaterial = Material.matchMaterial(tempConfig.getString("icon-ID"));
             if(tempMaterial == null) {
                 System.out.println("Unknown material: " + tempConfig.getString("icon-ID"));
                 tempMaterial = Material.DIRT;
             }
-            String tempName = tempConfig.getString("friendly-name");
+            String tempName = tempConfig.getString("gui-name");
 
-            Integer tempAmount = tempConfig.getInt("amount");
-            Integer tempPosition = tempConfig.getInt("position");
+            int tempAmount = tempConfig.getInt("amount");
+            int tempPosition = tempConfig.getInt("position");
 
-            Boolean tempRepeat = tempConfig.getBoolean("repeat-command");
-            Boolean tempEnchant = tempConfig.getBoolean("enchant");
+            boolean tempRepeat = tempConfig.getBoolean("repeat-command");
+            boolean tempEnchant = tempConfig.getBoolean("enchant");
 
             double incLin = tempConfig.getDouble("linear-increment");
             if(incLin < 0) {
@@ -100,7 +99,7 @@ public class ConfigManager {
                 incEsp = 0.0D;
             }
 
-            Integer tempMaxAmount = tempConfig.getInt("max-amount");
+            int tempMaxAmount = tempConfig.getInt("max-amount");
 
             List<String> tempLore = tempConfig.getStringList("lore");
             List<String> tempCommands = tempConfig.getStringList("commands");

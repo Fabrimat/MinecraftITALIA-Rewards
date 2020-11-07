@@ -4,7 +4,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class VoteCheckRunner extends BukkitRunnable {
 
-    private VotesManager votesManager;
+    private final VotesManager votesManager;
 
     public VoteCheckRunner(VotesManager votesManager) {
         this.votesManager = votesManager;

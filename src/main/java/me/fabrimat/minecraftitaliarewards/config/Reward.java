@@ -16,13 +16,27 @@ public class Reward {
     private List<String> lore;
     private List<String> commands;
 
-    public Reward(Material icon, String name, Integer baseAmount, Double incLin, Double incEsp, Integer average, Integer maxAmount, Integer votes, Integer position, Boolean amountRepeat, Boolean enchant, List<String> lore, List<String> commands) {
+    public Reward(Material icon,
+                  String name,
+                  int baseAmount,
+                  double incLin,
+                  double incEsp,
+                  int average,
+                  int maxAmount,
+                  int votes,
+                  int position,
+                  boolean amountRepeat,
+                  boolean enchant,
+                  List<String> lore,
+                  List<String> commands) {
         this.iconID = icon;
         this.guiName = name;
         this.amount = baseAmount;
-        Double multiplier = (incLin * Math.pow( (Double.valueOf(votes) / Double.valueOf(average)) , (Math.log(incEsp) / Math.log(2)) ) - incLin + 1.0D);
+        double multiplier = (incLin *
+                Math.pow( ((double) votes / (double) average) , (Math.log(incEsp) / Math.log(2)) ) -
+                incLin + 1.0D);
         if(multiplier > 1) {
-            this.amount = (int) (Double.valueOf(baseAmount)*multiplier);
+            this.amount = (int) ((double) baseAmount *multiplier);
         }
         if(this.amount > maxAmount) {
             this.amount = maxAmount;
@@ -30,16 +44,15 @@ public class Reward {
         if((multiplier <= 1 && votes > 30) || this.amount < baseAmount) {
             MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, "Errore durante il calcolo della quantità dei voti!");
             MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - Reward: " + name);
-            MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - BaseAmount: " + baseAmount.toString());
+            MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - BaseAmount: " + baseAmount);
             MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - Amount: " + this.amount);
-            MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - Multiplier: " + multiplier.toString());
-            MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - Votes: " + votes.toString());
-            MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - IncLin: " + incLin.toString());
-            MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - IncEsp: " + incEsp.toString());
-            MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - Average: " + average.toString());
+            MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - Multiplier: " + multiplier);
+            MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - Votes: " + votes);
+            MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - IncLin: " + incLin);
+            MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - IncEsp: " + incEsp);
+            MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - Average: " + average);
 
-            if(this.amount < baseAmount)
-                this.amount = baseAmount;
+            this.amount = Math.max(this.amount, baseAmount);
         }
 
         this.position = position;
@@ -57,7 +70,7 @@ public class Reward {
         return this.guiName;
     }
 
-    public Integer getAmount() {
+    public int getAmount() {
         return this.amount;
     }
 
@@ -69,15 +82,15 @@ public class Reward {
         return this.lore;
     }
 
-    public Integer getPosition() {
+    public int getPosition() {
         return this.position;
     }
 
-    public Boolean getRepeat() {
+    public boolean getRepeat() {
         return this.repeatCommand;
     }
 
-    public Boolean getEnchant() {
+    public boolean getEnchant() {
         return this.enchant;
     }
 
@@ -89,22 +102,19 @@ public class Reward {
         this.guiName = name;
     }
 
-    public void setAmount(Integer amount) {
-        if(amount > 0)
-            this.amount = amount;
-        else
-            this.amount = 1;
+    public void setAmount(int amount) {
+        this.amount = Math.max(amount, 1);
     }
 
     public void setCommands(List<String> commands) {
         this.commands = commands;
     }
 
-    public void setRepeat(Boolean ar) {
+    public void setRepeat(boolean ar) {
         this.repeatCommand = ar;
     }
 
-    public void setEnchant(Boolean enc) {
+    public void setEnchant(boolean enc) {
         this.enchant = enc;
     }
 
