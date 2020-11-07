@@ -8,7 +8,7 @@ import java.util.logging.Level;
 
 public class Reward {
     private Material iconID;
-    private String friendlyName;
+    private String guiName;
     private int amount;
     private final int position;
     private boolean repeatCommand;
@@ -18,7 +18,7 @@ public class Reward {
 
     public Reward(Material icon, String name, Integer baseAmount, Double incLin, Double incEsp, Integer average, Integer maxAmount, Integer votes, Integer position, Boolean amountRepeat, Boolean enchant, List<String> lore, List<String> commands) {
         this.iconID = icon;
-        this.friendlyName = name;
+        this.guiName = name;
         this.amount = baseAmount;
         Double multiplier = (incLin * Math.pow( (Double.valueOf(votes) / Double.valueOf(average)) , (Math.log(incEsp) / Math.log(2)) ) - incLin + 1.0D);
         if(multiplier > 1) {
@@ -53,8 +53,8 @@ public class Reward {
         return this.iconID;
     }
 
-    public String getFriendlyName() {
-        return this.friendlyName;
+    public String getGuiName() {
+        return this.guiName;
     }
 
     public Integer getAmount() {
@@ -85,8 +85,8 @@ public class Reward {
         this.iconID = icon;
     }
 
-    public void setFriendlyName(String name) {
-        this.friendlyName = name;
+    public void setGuiName(String name) {
+        this.guiName = name;
     }
 
     public void setAmount(Integer amount) {
@@ -104,7 +104,7 @@ public class Reward {
         this.repeatCommand = ar;
     }
 
-    public void setEncahnt(Boolean enc) {
+    public void setEnchant(Boolean enc) {
         this.enchant = enc;
     }
 
