@@ -1,0 +1,108 @@
+servername: slimecraft
+min-votes: 30
+average-votes: 25
+gui-size: 18
+max-votes-limit: 50
+ticks-announcer: 24000
+ticks-checker: 6000
+rewards:
+  '1':
+    icon-ID: DIAMOND
+    gui-name: "&4Diamanti"
+    position: 0
+    amount: 2
+    enchant: false
+    repeat-command: false
+    max-amount: 10
+    linear-increment: 0.7
+    esponential-increment: 4.8
+    lore:
+      - '&2Quantità: {amount}'
+      - '&6Clicca per ritirare!'
+    commands:
+      - give {playerName} diamond {amount}
+  '2':
+    icon-ID: FIREWORK_ROCKET
+    gui-name: "&4Razzi"
+    position: 1
+    amount: 16
+    enchant: false
+    repeat-command: false
+    max-amount: 50
+    linear-increment: 0.7
+    esponential-increment: 4.8
+    lore:
+      - '&2Quantità: {amount}'
+      - '&6Clicca per ritirare!'
+    commands:
+      - give {playerName} firework_rocket {amount}
+  '3':
+    icon-ID: REDSTONE
+    gui-name: "&4Redstone"
+    position: 2
+    amount: 8
+    enchant: false
+    repeat-command: false
+    max-amount: 50
+    linear-increment: 0.7
+    esponential-increment: 4.8
+    lore:
+      - '&2Quantità: {amount}'
+      - '&6Clicca per ritirare!'
+    commands:
+      - give {playerName} redstone {amount}
+  '4':
+    icon-ID: SHULKER_SHELL
+    gui-name: "&4Guscio di Shulker"
+    position: 3
+    amount: 1
+    enchant: false
+    repeat-command: false
+    max-amount: 5
+    linear-increment: 0.7
+    esponential-increment: 4.8
+    lore:
+      - '&2Quantità: {amount}'
+      - '&6Clicca per ritirare!'
+    commands:
+      - give {playerName} shulker_shell {amount}
+  '5':
+    icon-ID: APPLE
+    gui-name: "&4Mela"
+    position: 4
+    amount: 5
+    enchant: false
+    repeat-command: false
+    max-amount: 50
+    linear-increment: 0.7
+    esponential-increment: 4.8
+    lore:
+      - '&2Quantità: {amount}'
+      - '&6Clicca per ritirare!'
+    commands:
+      - give {playerName} apple {amount}
+  '6':
+    icon-ID: IRON_INGOT
+    gui-name: "&4Lingotto di ferro"
+    position: 5
+    amount: 8
+    linear-increment: 0.7
+    esponential-increment: 4.8
+    repeat-command: false
+    max-amount: 50
+    lore:
+      - '&2Quantità: {amount}'
+      - '&6Clicca per ritirare!'
+    commands:
+      - give {playerName} iron_ingot {amount}
+messages:
+  prefix: "&7{&aMinecraftItaliaRewards&7} "
+  claim-your-reward: "&bIeri ben &d{votes} &bpersone hanno votato il server su Minecraft Italia! Utilizza &f/&dpremio &bper ritirare il tuo premio."
+  thanks-for-claiming: "&bHai ritirato il tuo premio! Se anche oggi voteranno almeno &d{minVotes} &bpersone potrai ritirarlo anche domani! Vota il server con &f/&dvota &bper assicurarti di riceverlo anche domani!"
+  already-claimed: "&bHai già ritirato il tuo premio per oggi. Vota il server con &f/&dvota &bper assicurarti di riceverlo anche domani!"
+  not-enough-votes: "&bPurtroppo ieri ci sono stati meno di {minVotes} voti. Vota il server con &f/&dvota &bper assicurarti di ricevere il premio domani!"
+  waiting-for-server: "&bStiamo caricando i dati da Minecraft Italia, per favore attendi!"
+  first-of-the-month: "&bBuon primo del mese! Ti sei ricordato di votare? Potrai ottenere fantastici premi! Ritirali con &f/&dpremio&b!"
+  no-permission: "&cYou do not have permission!"
+  limit-exceeded: "&cIl limite dei voti è stato superato, potrebbe essere causato da un problema di Minecraft Italia. Per favore contatta un amministratore."
+  vote-error: "&cE' stato riscontrato un errore durante il controllo dei voti. Per favore contatta un amministratore."

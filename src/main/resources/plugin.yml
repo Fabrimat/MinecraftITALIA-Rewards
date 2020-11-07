@@ -1,0 +1,15 @@
+main: me.fabrimat.MinecraftItaliaRewards.MinecraftItaliaRewards
+name: MinecraftItaliaRewards
+version: '${project.version}'
+author: Fabrimat
+softdepend: [PlaceholderAPI]
+commands:
+  premio:
+    description: Comando per ricevere i premi
+    permission: mcita.reward
+    permission-message: You do not have permission!
+    usage: /premio
+permissions:
+  mcita.reward:
+    description: Permette di ricevere il premio
+    default: op
