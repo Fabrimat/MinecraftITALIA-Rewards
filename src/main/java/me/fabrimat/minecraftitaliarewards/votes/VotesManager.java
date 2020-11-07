@@ -1,5 +1,6 @@
-package me.fabrimat.minecraftitaliarewards;
+package me.fabrimat.minecraftitaliarewards.votes;
 
+import me.fabrimat.minecraftitaliarewards.remote.RemoteQuery;
 import org.bukkit.plugin.Plugin;
 
 import java.time.LocalDate;

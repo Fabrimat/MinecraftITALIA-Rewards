@@ -1,5 +1,6 @@
-package me.fabrimat.minecraftitaliarewards;
+package me.fabrimat.minecraftitaliarewards.config;
 
+import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;

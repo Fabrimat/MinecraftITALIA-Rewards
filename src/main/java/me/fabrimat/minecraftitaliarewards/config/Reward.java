@@ -1,5 +1,6 @@
-package me.fabrimat.minecraftitaliarewards;
+package me.fabrimat.minecraftitaliarewards.config;
 
+import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
 import org.bukkit.Material;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public class Reward {
     private Material iconID;
     private String friendlyName;
     private int amount;
-    private int position;
+    private final int position;
     private boolean repeatCommand;
     private boolean enchant;
     private List<String> lore;

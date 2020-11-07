@@ -1,4 +1,4 @@
-package me.fabrimat.minecraftitaliarewards;
+package me.fabrimat.minecraftitaliarewards.votes;
 
 public enum VoteStatus {
     WAITING,

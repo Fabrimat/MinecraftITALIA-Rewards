@@ -1,5 +1,7 @@
 package me.fabrimat.minecraftitaliarewards;
 
+import me.fabrimat.minecraftitaliarewards.config.ConfigManager;
+import me.fabrimat.minecraftitaliarewards.votes.VotesManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class MinecraftItaliaRewards extends JavaPlugin {
