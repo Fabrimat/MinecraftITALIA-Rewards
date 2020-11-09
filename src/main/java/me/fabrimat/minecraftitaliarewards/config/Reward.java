@@ -121,5 +121,11 @@ public class Reward {
     public void setLore(List<String> lore) {
         this.lore = lore;
     }
+
+    public static String format(Reward reward, String from) {
+        from = from.replaceAll("\\{amount}", String.valueOf(reward.getAmount()));
+
+        return from;
+    }
 }
 

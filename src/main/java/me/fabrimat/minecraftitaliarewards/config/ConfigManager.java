@@ -20,6 +20,7 @@ public class ConfigManager {
     private Integer average;
     private Integer maxVotesLimit;
     private List<Reward> rewards;
+    private String guiTitle;
 
     private String prefix;
     private String claimYourRewardMessage;
@@ -55,6 +56,7 @@ public class ConfigManager {
         if(this.average < 1) {
             this.average = 1;
         }
+        this.guiTitle = config.getString("gui-title");
 
         this.prefix = config.getString("messages.prefix");
         this.claimYourRewardMessage = config.getString("messages.claim-your-reward");
@@ -69,6 +71,8 @@ public class ConfigManager {
 
         this.ticksAnnouncer = config.getLong("ticks-announcer");
         this.ticksChecker = config.getLong("ticks-checker");
+
+        this.loadRewards();
     }
 
     public void loadRewards() {
@@ -196,4 +200,7 @@ public class ConfigManager {
     }
 
 
+    public String getGuiTitle() {
+        return guiTitle;
+    }
 }
