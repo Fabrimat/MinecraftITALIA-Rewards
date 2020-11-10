@@ -1,5 +1,6 @@
-package me.fabrimat.minecraftitaliarewards.gui;
+package me.fabrimat.minecraftitaliarewards.gui.listeners;
 
+import me.fabrimat.minecraftitaliarewards.gui.GuiHolder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -18,7 +19,7 @@ public class InventoryListener implements Listener {
         Inventory inventory = event.getClickedInventory();
         Player player = (Player) event.getWhoClicked();
 
-        if(inventory != null && inventory.getHolder() instanceof GuiHolder && inventory.equals(((GuiHolder) inventory.getHolder()).getGUI().inventory)) {
+        if(inventory != null && inventory.getHolder() instanceof GuiHolder && inventory.equals(((GuiHolder) inventory.getHolder()).getGUI().getInventory())) {
 
             ((GuiHolder) inventory.getHolder()).getGUI().onClick(player, event);
         }

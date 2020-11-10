@@ -78,7 +78,7 @@ public class Gui {
         }
     }
 
-    protected void onClick(@NotNull Player player, @NotNull InventoryClickEvent event) {
+    public void onClick(@NotNull Player player, @NotNull InventoryClickEvent event) {
         final int cell = event.getSlot();
         this.buttons.get(cell).onClick(new GuiClickEvent(this, player, event, cell));
     }

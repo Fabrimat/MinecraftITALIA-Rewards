@@ -46,7 +46,9 @@ public class VotesManager {
     }
 
     public void stopRunner() {
-        this.voteCheckRunner.cancel();
+        if(!this.voteCheckRunner.isCancelled()) {
+            this.voteCheckRunner.cancel();
+        }
     }
 
     public boolean isRunnerActive() {
