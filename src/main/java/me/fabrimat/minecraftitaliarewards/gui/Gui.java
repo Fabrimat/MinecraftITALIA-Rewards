@@ -2,8 +2,10 @@ package me.fabrimat.minecraftitaliarewards.gui;
 
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
+import me.fabrimat.minecraftitaliarewards.gui.events.GuiClickEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -16,6 +18,7 @@ public class Gui {
 
     protected String title;
     protected int rows;
+
     protected final Map<Integer, Clickable> buttons = new HashMap<>();;
     protected final Map<Integer, ItemStack> items = new HashMap<>();;
 
@@ -75,6 +78,11 @@ public class Gui {
         }
     }
 
+    protected void onClick(@NotNull Player player, @NotNull InventoryClickEvent event) {
+        final int cell = event.getSlot();
+        this.buttons.get(cell).onClick(new GuiClickEvent(this, player, event, cell));
+    }
+
     public String getTitle() {
         return title;
     }
@@ -89,6 +97,10 @@ public class Gui {
 
     public void setRows(int rows) {
         this.rows = rows;
+    }
+
+    public Map<Integer, Clickable> getButtons() {
+        return buttons;
     }
 
     public Inventory getInventory() {

@@ -20,7 +20,7 @@ public class Reward {
                   String name,
                   int baseAmount,
                   double incLin,
-                  double incEsp,
+                  double incExp,
                   int average,
                   int maxAmount,
                   int votes,
@@ -33,7 +33,7 @@ public class Reward {
         this.guiName = name;
         this.amount = baseAmount;
         double multiplier = (incLin *
-                Math.pow( ((double) votes / (double) average) , (Math.log(incEsp) / Math.log(2)) ) -
+                Math.pow( ((double) votes / (double) average) , (Math.log(incExp) / Math.log(2)) ) -
                 incLin + 1.0D);
         if(multiplier > 1) {
             this.amount = (int) ((double) baseAmount *multiplier);
@@ -49,7 +49,7 @@ public class Reward {
             MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - Multiplier: " + multiplier);
             MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - Votes: " + votes);
             MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - IncLin: " + incLin);
-            MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - IncEsp: " + incEsp);
+            MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - IncExp: " + incExp);
             MinecraftItaliaRewards.getInstance().getLogger().log(Level.INFO, " - Average: " + average);
 
             this.amount = Math.max(this.amount, baseAmount);
@@ -60,6 +60,17 @@ public class Reward {
         this.enchant = enchant;
         this.lore = lore;
         this.commands = commands;
+    }
+
+    private double getMultiplier(double incLin, double incExp, int votes, double average) {
+        average = Math.max(average, Double.MIN_VALUE);
+        incLin = Math.max(incLin, 0);
+        incExp = Math.max(incExp, 1);
+        votes = Math.max(votes, 0);
+
+        return (incLin *
+                Math.pow( ((double) votes / average) , (Math.log(incExp) / Math.log(2)) ) -
+                incLin + 1.0D);
     }
 
     public Material getIcon() {

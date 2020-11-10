@@ -16,7 +16,7 @@ public class ConfigManager {
 
     private String serverName;
     private Integer minVotes;
-    private Integer guiSize;
+    private Integer guiRows;
     private Integer average;
     private Integer maxVotesLimit;
     private List<Reward> rewards;
@@ -47,9 +47,9 @@ public class ConfigManager {
     private void loadConfig() {
         this.serverName = config.getString("server-name", "");
         this.minVotes = config.getInt("min-votes");
-        this.guiSize = config.getInt("gui-size");
-        if (guiSize <= 0 || guiSize % 9 != 0) {
-            guiSize = 27;
+        this.guiRows = config.getInt("gui-rows");
+        if (guiRows <= 0 || guiRows % 9 != 0) {
+            guiRows = 27;
         }
         this.maxVotesLimit = config.getInt("max-votes-limit");
         this.average = config.getInt("average-votes");
@@ -98,7 +98,7 @@ public class ConfigManager {
             if(incLin < 0) {
                 incLin = 0.0D;
             }
-            double incEsp = tempConfig.getDouble("esponential-increment");
+            double incEsp = tempConfig.getDouble("exponential-increment");
             if(incEsp < 0) {
                 incEsp = 0.0D;
             }
@@ -133,10 +133,10 @@ public class ConfigManager {
         return average;
     }
 
-    public Integer getGuiSize() {
-        if(this.guiSize == 0)
+    public Integer getGuiRows() {
+        if(this.guiRows == 0)
             return 9;
-        return guiSize;
+        return guiRows;
     }
 
     public Integer getMaxVotesLimit() {
