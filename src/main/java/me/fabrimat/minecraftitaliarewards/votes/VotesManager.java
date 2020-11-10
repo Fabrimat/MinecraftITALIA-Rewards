@@ -16,6 +16,7 @@ import java.util.List;
 public class VotesManager {
 
     private final MinecraftItaliaRewards plugin;
+    private final ConfigManager configManager;
     private int votes;
     private LocalDate loadDate;
 
@@ -23,12 +24,17 @@ public class VotesManager {
 
     public VotesManager(MinecraftItaliaRewards plugin) {
         this.plugin = plugin;
+        this.configManager = plugin.getConfigManager();
         this.voteCheckRunner = new VoteCheckRunner(plugin);
     }
 
     public VoteStatus getStatus() {
         if(loadDate.isEqual(LocalDate.now())) {
             if(votes >= 0) {
+                if(votes > configManager.getMaxVotesLimit()) {
+                    // TODO error message
+                    return VoteStatus.ERROR;
+                }
                 return VoteStatus.ACQUIRED;
             }
             return VoteStatus.FAILURE;
@@ -39,6 +45,10 @@ public class VotesManager {
     public void loadVotes() {
         votes = RemoteQuery.getRemoteVotes();
         loadDate = LocalDate.now();
+    }
+
+    public void forceRun() {
+        this.voteCheckRunner.runTaskAsynchronously(this.plugin);
     }
 
     public void startRunner() {

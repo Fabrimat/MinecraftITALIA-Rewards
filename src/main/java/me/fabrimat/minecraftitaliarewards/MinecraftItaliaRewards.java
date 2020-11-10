@@ -1,6 +1,7 @@
 package me.fabrimat.minecraftitaliarewards;
 
 import me.fabrimat.minecraftitaliarewards.config.ConfigManager;
+import me.fabrimat.minecraftitaliarewards.database.DatabaseManager;
 import me.fabrimat.minecraftitaliarewards.gui.GuiManager;
 import me.fabrimat.minecraftitaliarewards.votes.VotesManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,11 +12,13 @@ public class MinecraftItaliaRewards extends JavaPlugin {
     private VotesManager votesManager;
     private ConfigManager configManager;
     private GuiManager guiManager;
+    private DatabaseManager databaseManager;
 
     @Override
     public void onEnable() {
         instance = this;
         this.configManager = new ConfigManager(this);
+        this.databaseManager = new DatabaseManager(this);
 
         this.guiManager = new GuiManager(this);
 
@@ -44,5 +47,9 @@ public class MinecraftItaliaRewards extends JavaPlugin {
 
     public GuiManager getGuiManager() {
         return guiManager;
+    }
+
+    public DatabaseManager getDatabaseManager() {
+        return databaseManager;
     }
 }

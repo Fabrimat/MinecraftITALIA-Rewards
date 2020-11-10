@@ -14,6 +14,13 @@ public class ConfigManager {
     private final YamlConfiguration config;
     private final MinecraftItaliaRewards plugin;
 
+    private String databaseType;
+    private String mySQLAddress;
+    private String mySQLUser;
+    private String mySQLPassword;
+    private String mySQLDatabase;
+    private String mySQLFlags;
+
     private String serverName;
     private Integer minVotes;
     private Integer guiRows;
@@ -45,6 +52,13 @@ public class ConfigManager {
     }
 
     private void loadConfig() {
+        this.databaseType = config.getString("database-type", "sqlite").toLowerCase();
+        this.mySQLAddress = config.getString("database-type", "localhost:3306");
+        this.mySQLUser = config.getString("database-type", "mcitarewards");
+        this.mySQLPassword = config.getString("database-type", "mcitarewards");
+        this.mySQLDatabase = config.getString("database-type", "mcitarewards");
+        this.mySQLFlags = config.getString("database-type", "");
+
         this.serverName = config.getString("server-name", "");
         this.minVotes = config.getInt("min-votes");
         this.guiRows = config.getInt("gui-rows");
@@ -117,6 +131,30 @@ public class ConfigManager {
         return rewards;
     }
 
+    public String getDatabaseType() {
+        return databaseType;
+    }
+
+    public String getMySQLAddress() {
+        return mySQLAddress;
+    }
+
+    public String getMySQLUser() {
+        return mySQLUser;
+    }
+
+    public String getMySQLPassword() {
+        return mySQLPassword;
+    }
+
+    public String getMySQLDatabase() {
+        return mySQLDatabase;
+    }
+
+    public String getMySQLFlags() {
+        return mySQLFlags;
+    }
+
     public String getServerName() {
         return serverName;
     }
@@ -152,39 +190,39 @@ public class ConfigManager {
     }
 
     public ConfigString getClaimYourRewardMessage() {
-        return new ConfigString(this.claimYourRewardMessage);
+        return new ConfigString(this, this.claimYourRewardMessage);
     }
 
     public ConfigString getFirstOfTheMonthMessage() {
-        return new ConfigString(this.firstOfTheMonth);
+        return new ConfigString(this, this.firstOfTheMonth);
     }
 
     public ConfigString getThanksForClaimingMessage() {
-        return new ConfigString(this.thanksForClaimingMessage);
+        return new ConfigString(this, this.thanksForClaimingMessage);
     }
 
     public ConfigString getAlreadyClaimedMessage() {
-        return new ConfigString(this.alreadyClaimedMessage);
+        return new ConfigString(this, this.alreadyClaimedMessage);
     }
 
     public ConfigString getNotEnoughVotesMessage() {
-        return new ConfigString(this.notEnoughVotesMessage);
+        return new ConfigString(this, this.notEnoughVotesMessage);
     }
 
     public ConfigString getWaitingForServer() {
-        return new ConfigString(this.waitingForServerMessage);
+        return new ConfigString(this, this.waitingForServerMessage);
     }
 
     public ConfigString getNoPermissionMessage() {
-        return new ConfigString(this.noPermissionMessage);
+        return new ConfigString(this, this.noPermissionMessage);
     }
 
     public ConfigString getLimitExceededMessage() {
-        return new ConfigString(this.limitExceededMessage);
+        return new ConfigString(this, this.limitExceededMessage);
     }
 
     public ConfigString getVoteErrorMessage() {
-        return new ConfigString(this.voteErrorMessage);
+        return new ConfigString(this, this.voteErrorMessage);
     }
 
     public Long getTicksChecker() {

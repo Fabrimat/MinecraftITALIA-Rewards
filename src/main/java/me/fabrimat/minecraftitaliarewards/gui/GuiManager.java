@@ -3,20 +3,24 @@ package me.fabrimat.minecraftitaliarewards.gui;
 import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
 import me.fabrimat.minecraftitaliarewards.config.ConfigManager;
 import me.fabrimat.minecraftitaliarewards.config.Reward;
+import me.fabrimat.minecraftitaliarewards.database.DatabaseManager;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GuiManager {
 
     private final ConfigManager configManager;
+    private final DatabaseManager databaseManager;
     private Gui gui;
 
     public GuiManager(MinecraftItaliaRewards plugin) {
         this.configManager = plugin.getConfigManager();
+        this.databaseManager = plugin.getDatabaseManager();
         this.reload();
     }
 
@@ -41,10 +45,14 @@ public class GuiManager {
             guiItem.setItemMeta(meta);
 
             this.gui.addButton(reward.getPosition(), guiItem, (event) -> {
+                databaseManager.insertPlayer(
+                        event.getPlayer().getUniqueId().toString(),
+                        event.getPlayer().getName(),
+                        System.currentTimeMillis());
                 for(String command: reward.getCommands()) {
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
                             Reward.format(reward, command
-                                    .replaceAll("\\{playerName}", event.player.getName())
+                                    .replaceAll("\\{playerName}", event.getPlayer().getName())
                                     .replaceAll("\\{amount}", String.valueOf(reward.getAmount()))));
                 }
             });

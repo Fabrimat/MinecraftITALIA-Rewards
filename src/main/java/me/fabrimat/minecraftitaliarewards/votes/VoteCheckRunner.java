@@ -19,10 +19,15 @@ public class VoteCheckRunner extends BukkitRunnable {
 
     @Override
     public void run() {
-        if(votesManager.getStatus().equals(VoteStatus.WAITING) ||
-                votesManager.getStatus().equals(VoteStatus.FAILURE)) {
-            votesManager.loadVotes();
-            Bukkit.getScheduler().runTask(plugin, guiManager::reload);
+        switch (votesManager.getStatus()) {
+            case WAITING:
+            case FAILURE:
+            case ERROR:
+                votesManager.loadVotes();
+                Bukkit.getScheduler().runTask(plugin, guiManager::reload);
+            default:
+                break;
+
         }
     }
 }

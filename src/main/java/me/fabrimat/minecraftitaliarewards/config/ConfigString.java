@@ -4,9 +4,11 @@ import org.bukkit.ChatColor;
 
 public class ConfigString {
 
+    private final ConfigManager configManager;
     private final String value;
 
-    public ConfigString(String s) {
+    public ConfigString(ConfigManager configManager, String s) {
+        this.configManager = configManager;
         this.value = s;
     }
 
@@ -14,9 +16,9 @@ public class ConfigString {
         return value;
     }
 
-    /*public String getFormattedValue() {
-        return ChatColor.translateAlternateColorCodes('&', Config.getInstance().getPrefix() + " " + value);
-    }*/
+    public String getFormattedValue() {
+        return ChatColor.translateAlternateColorCodes('&', configManager.getPrefix() + " " + value);
+    }
 
     public String toString() {
         return value;

@@ -5,12 +5,20 @@ import org.bukkit.entity.Player;
 
 public abstract class GuiEvent {
 
-    public final Gui gui;
-    public final Player player;
+    private final Gui gui;
+    private final Player player;
 
     public GuiEvent(Gui gui, Player player) {
         this.gui = gui;
         this.player = player;
+    }
+
+    public Gui getGui() {
+        return gui;
+    }
+
+    public Player getPlayer() {
+        return this.player;
     }
 
 }
