@@ -26,7 +26,8 @@ public class MinecraftItaliaRewards extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
+        this.guiManager.getGui().close();
+        this.votesManager.stopRunner();
     }
 
     public static MinecraftItaliaRewards getInstance() {
