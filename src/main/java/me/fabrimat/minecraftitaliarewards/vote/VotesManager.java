@@ -3,7 +3,7 @@ package me.fabrimat.minecraftitaliarewards.vote;
 import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
 import me.fabrimat.minecraftitaliarewards.manager.SchedulerManager;
 import me.fabrimat.minecraftitaliarewards.config.ConfigManager;
-import me.fabrimat.minecraftitaliarewards.remote.RemoteQuery;
+import me.fabrimat.minecraftitaliarewards.remote.RemoteManager;
 
 import java.time.LocalDate;
 
@@ -11,7 +11,8 @@ public class VotesManager implements SchedulerManager {
 
     private final MinecraftItaliaRewards plugin;
     private final ConfigManager configManager;
-    private int votes;
+    private final RemoteManager remoteManager;
+    private int value;
     private LocalDate loadDate;
 
     private final VoteCheckRunner voteCheckRunner;
@@ -19,6 +20,7 @@ public class VotesManager implements SchedulerManager {
     public VotesManager(MinecraftItaliaRewards plugin) {
         this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
+        this.remoteManager = plugin.getRemoteManager();
         this.voteCheckRunner = new VoteCheckRunner(plugin);
         startRunner();
     }
@@ -32,9 +34,9 @@ public class VotesManager implements SchedulerManager {
     }
 
     public VoteStatus getStatus() {
-        if(loadDate.isEqual(LocalDate.now())) {
-            if(votes >= 0) {
-                if(votes > configManager.getMaxVotesLimit()) {
+        if(LocalDate.now().isEqual(loadDate)) {
+            if(value >= 0) {
+                if(value > configManager.getRewardConfig().getInt("max-value")) {
                     // TODO error message
                     return VoteStatus.ERROR;
                 }
@@ -46,12 +48,14 @@ public class VotesManager implements SchedulerManager {
     }
 
     public void loadVotes() {
-        votes = RemoteQuery.getRemoteVotes();
-        loadDate = LocalDate.now();
+        if(remoteManager.isSuccess()) {
+            value = remoteManager.getVotesYesterday();
+            loadDate = LocalDate.now();
+        }
     }
 
     public boolean isRewardDay() {
-        return getVotes() >= configManager.getMinVotes();
+        return getValue() >= configManager.getRewardConfig().getInt("min-value");
     }
 
     @Override
@@ -75,7 +79,7 @@ public class VotesManager implements SchedulerManager {
         return !this.voteCheckRunner.isCancelled();
     }
 
-    public int getVotes() {
-        return this.votes;
+    public int getValue() {
+        return this.value;
     }
 }

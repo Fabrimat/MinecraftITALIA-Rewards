@@ -39,9 +39,9 @@ public class GuiManager implements Manager {
     }
 
     private void loadGui() {
-        this.gui.setRows(configManager.getGuiRows());
-        this.gui.setTitle(configManager.getGuiTitle());
-        for(Reward reward : configManager.getRewards()) {
+        this.gui.setRows(configManager.getRewardConfig().getInt("gui-rows"));
+        this.gui.setTitle(configManager.getRewardConfig().getString("gui-title"));
+        for(Reward reward : configManager.getRewardConfig().getRewards()) {
             ItemStack guiItem = new ItemStack(reward.getIcon());
             ItemMeta meta = guiItem.getItemMeta();
             meta.setDisplayName(Reward.format(reward, reward.getGuiName()));

@@ -21,7 +21,7 @@ public class Reward {
                   int baseAmount,
                   double incLin,
                   double incExp,
-                  int average,
+                  double average,
                   int maxAmount,
                   int votes,
                   int position,
@@ -33,7 +33,7 @@ public class Reward {
         this.guiName = name;
         this.amount = baseAmount;
         double multiplier = (incLin *
-                Math.pow( ((double) votes / (double) average) , (Math.log(incExp) / Math.log(2)) ) -
+                Math.pow( ((double) votes / average) , (Math.log(incExp) / Math.log(2)) ) -
                 incLin + 1.0D);
         if(multiplier > 1) {
             this.amount = (int) ((double) baseAmount *multiplier);

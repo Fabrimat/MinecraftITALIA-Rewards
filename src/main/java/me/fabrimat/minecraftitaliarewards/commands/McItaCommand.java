@@ -11,12 +11,10 @@ import org.bukkit.command.CommandSender;
 public class McItaCommand implements CommandExecutor {
 
     private final VotesManager votesManager;
-    private final GuiManager guiManager;
     private final ConfigManager configManager;
 
     public McItaCommand(MinecraftItaliaRewards plugin) {
         this.votesManager = plugin.getVotesManager();
-        this.guiManager = plugin.getGuiManager();
         this.configManager = plugin.getConfigManager();
     }
     @Override
@@ -25,7 +23,7 @@ public class McItaCommand implements CommandExecutor {
             return false;
         }
         if(!sender.hasPermission("mcita.admin")) {
-            sender.sendMessage(configManager.getNoPermissionMessage().getFormattedValue());
+            sender.sendMessage(configManager.getMessageConfig().getString("no-permission"));
             return true;
         }
 

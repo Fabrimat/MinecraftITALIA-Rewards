@@ -4,6 +4,7 @@ import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
 import me.fabrimat.minecraftitaliarewards.config.ConfigManager;
 import me.fabrimat.minecraftitaliarewards.database.DatabaseManager;
 import me.fabrimat.minecraftitaliarewards.gui.GuiManager;
+import me.fabrimat.minecraftitaliarewards.message.MessageManager;
 import me.fabrimat.minecraftitaliarewards.vote.VotesManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -19,6 +20,7 @@ public class RewardCommand implements CommandExecutor {
     private final GuiManager guiManager;
     private final ConfigManager configManager;
     private final DatabaseManager databaseManager;
+    private final MessageManager messageManager;
 
     public RewardCommand(MinecraftItaliaRewards plugin) {
         this.plugin = plugin;
@@ -26,12 +28,13 @@ public class RewardCommand implements CommandExecutor {
         this.guiManager = plugin.getGuiManager();
         this.configManager = plugin.getConfigManager();
         this.databaseManager = plugin.getDatabaseManager();
+        this.messageManager = plugin.getMessageManager();
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(!(sender instanceof Player)) {
-            sender.sendMessage(configManager.getPrefix() + "Command not supported from console");
+            this.messageManager.sendMessage(sender, true, "Command not supported from console");
             return true;
         }
 
