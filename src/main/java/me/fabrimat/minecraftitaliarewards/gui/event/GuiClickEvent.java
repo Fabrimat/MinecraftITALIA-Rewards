@@ -1,4 +1,4 @@
-package me.fabrimat.minecraftitaliarewards.gui.events;
+package me.fabrimat.minecraftitaliarewards.gui.event;
 
 import me.fabrimat.minecraftitaliarewards.gui.Gui;
 import org.bukkit.entity.Player;

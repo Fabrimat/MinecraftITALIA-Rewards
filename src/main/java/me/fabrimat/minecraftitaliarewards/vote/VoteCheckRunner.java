@@ -1,4 +1,4 @@
-package me.fabrimat.minecraftitaliarewards.votes;
+package me.fabrimat.minecraftitaliarewards.vote;
 
 import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
 import me.fabrimat.minecraftitaliarewards.database.DatabaseManager;

@@ -1,6 +1,6 @@
 package me.fabrimat.minecraftitaliarewards.gui;
 
-import me.fabrimat.minecraftitaliarewards.gui.events.GuiClickEvent;
+import me.fabrimat.minecraftitaliarewards.gui.event.GuiClickEvent;
 
 public interface Clickable {
 

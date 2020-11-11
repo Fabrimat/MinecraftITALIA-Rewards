@@ -1,6 +1,6 @@
 package me.fabrimat.minecraftitaliarewards.gui;
 
-import me.fabrimat.minecraftitaliarewards.interfaces.Manager;
+import me.fabrimat.minecraftitaliarewards.manager.Manager;
 import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
 import me.fabrimat.minecraftitaliarewards.config.ConfigManager;
 import me.fabrimat.minecraftitaliarewards.config.Reward;

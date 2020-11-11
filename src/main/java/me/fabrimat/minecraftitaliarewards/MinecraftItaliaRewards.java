@@ -4,7 +4,7 @@ import me.fabrimat.minecraftitaliarewards.announce.AnnounceManager;
 import me.fabrimat.minecraftitaliarewards.config.ConfigManager;
 import me.fabrimat.minecraftitaliarewards.database.DatabaseManager;
 import me.fabrimat.minecraftitaliarewards.gui.GuiManager;
-import me.fabrimat.minecraftitaliarewards.votes.VotesManager;
+import me.fabrimat.minecraftitaliarewards.vote.VotesManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class MinecraftItaliaRewards extends JavaPlugin {

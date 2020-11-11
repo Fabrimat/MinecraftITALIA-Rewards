@@ -1,7 +1,7 @@
 package me.fabrimat.minecraftitaliarewards.announce;
 
 import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
-import me.fabrimat.minecraftitaliarewards.interfaces.SchedulerManager;
+import me.fabrimat.minecraftitaliarewards.manager.SchedulerManager;
 import me.fabrimat.minecraftitaliarewards.config.ConfigManager;
 
 public class AnnounceManager implements SchedulerManager {

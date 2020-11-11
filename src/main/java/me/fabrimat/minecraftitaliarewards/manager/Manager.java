@@ -1,4 +1,4 @@
-package me.fabrimat.minecraftitaliarewards.interfaces;
+package me.fabrimat.minecraftitaliarewards.manager;
 
 public interface Manager {
 

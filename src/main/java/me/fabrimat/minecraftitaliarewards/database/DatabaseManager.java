@@ -1,6 +1,6 @@
 package me.fabrimat.minecraftitaliarewards.database;
 
-import me.fabrimat.minecraftitaliarewards.interfaces.Manager;
+import me.fabrimat.minecraftitaliarewards.manager.Manager;
 import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
 
 import java.sql.Connection;

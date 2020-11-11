@@ -2,7 +2,7 @@ package me.fabrimat.minecraftitaliarewards.announce;
 
 import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
 import me.fabrimat.minecraftitaliarewards.database.DatabaseManager;
-import me.fabrimat.minecraftitaliarewards.votes.VotesManager;
+import me.fabrimat.minecraftitaliarewards.vote.VotesManager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;

@@ -3,7 +3,7 @@ package me.fabrimat.minecraftitaliarewards.commands;
 import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
 import me.fabrimat.minecraftitaliarewards.config.ConfigManager;
 import me.fabrimat.minecraftitaliarewards.gui.GuiManager;
-import me.fabrimat.minecraftitaliarewards.votes.VotesManager;
+import me.fabrimat.minecraftitaliarewards.vote.VotesManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

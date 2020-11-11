@@ -1,6 +1,6 @@
 package me.fabrimat.minecraftitaliarewards.gui;
 
-import me.fabrimat.minecraftitaliarewards.gui.events.GuiClickEvent;
+import me.fabrimat.minecraftitaliarewards.gui.event.GuiClickEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;

@@ -1,4 +1,4 @@
-package me.fabrimat.minecraftitaliarewards.gui.listeners;
+package me.fabrimat.minecraftitaliarewards.gui.listener;
 
 import me.fabrimat.minecraftitaliarewards.gui.GuiHolder;
 import org.bukkit.entity.Player;

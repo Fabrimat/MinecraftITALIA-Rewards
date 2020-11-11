@@ -1,6 +1,4 @@
-package me.fabrimat.minecraftitaliarewards.interfaces;
-
-import me.fabrimat.minecraftitaliarewards.interfaces.Manager;
+package me.fabrimat.minecraftitaliarewards.manager;
 
 public interface SchedulerManager extends Manager {
 

@@ -1,6 +1,6 @@
 package me.fabrimat.minecraftitaliarewards.config;
 
-import me.fabrimat.minecraftitaliarewards.interfaces.Manager;
+import me.fabrimat.minecraftitaliarewards.manager.Manager;
 import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;

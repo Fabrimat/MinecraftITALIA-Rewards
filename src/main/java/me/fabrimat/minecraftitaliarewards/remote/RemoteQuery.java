@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
-import me.fabrimat.minecraftitaliarewards.exceptions.PrimaryThreadException;
+import me.fabrimat.minecraftitaliarewards.exception.PrimaryThreadException;
 import org.bukkit.Bukkit;
 
 import javax.net.ssl.HttpsURLConnection;
