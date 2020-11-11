@@ -22,7 +22,10 @@ public class DatabaseManager implements Manager {
 
     @Override
     public void reload() {
-        switch (plugin.getConfigManager().getDatabaseType()) {
+        switch (plugin.getConfigManager()
+                .getMainConfig()
+                .getString("database-type", "SQLITE")
+                .toUpperCase()) {
             case "MYSQL":
                 this.database = new MySQL(plugin);
                 break;

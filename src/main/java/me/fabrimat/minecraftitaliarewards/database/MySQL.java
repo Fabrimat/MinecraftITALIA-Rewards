@@ -2,6 +2,7 @@ package me.fabrimat.minecraftitaliarewards.database;
 
 import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
 import me.fabrimat.minecraftitaliarewards.config.ConfigManager;
+import me.fabrimat.minecraftitaliarewards.config.MainConfig;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,12 +24,14 @@ public class MySQL extends Database {
             if(connection!=null && !connection.isClosed()){
                 return connection;
             }
+            MainConfig mainConfig = configManager.getMainConfig();
+
             Class.forName("org.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql:" +
-                            configManager.getMySQLAddress() +
-                            "/" + configManager.getMySQLDatabase(),
-                    configManager.getMySQLUser(),
-                    configManager.getMySQLPassword());
+                            mainConfig.getString("mysql.dress", "localhost:3306") +
+                            "/" + mainConfig.getString("mysql.database", "mcitarewards"),
+                    mainConfig.getString("mysql.user", "mcitarewards"),
+                    mainConfig.getString("mysql.password", "mcitarewards"));
             return connection;
         } catch (SQLException ex) {
             plugin.getLogger().log(Level.SEVERE,"MySQL exception on initialize", ex);
