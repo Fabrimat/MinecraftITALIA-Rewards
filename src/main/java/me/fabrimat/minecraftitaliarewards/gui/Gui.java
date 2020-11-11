@@ -43,7 +43,7 @@ public class Gui {
     }
 
     public void close() {
-        if(inventory != null) {
+        if(isOpen()) {
             inventory.getViewers().stream()
                     .filter(e -> e instanceof Player)
                     .map(e -> (Player) e)
