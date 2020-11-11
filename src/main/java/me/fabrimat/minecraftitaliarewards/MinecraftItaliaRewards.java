@@ -4,6 +4,9 @@ import me.fabrimat.minecraftitaliarewards.announce.AnnounceManager;
 import me.fabrimat.minecraftitaliarewards.config.ConfigManager;
 import me.fabrimat.minecraftitaliarewards.database.DatabaseManager;
 import me.fabrimat.minecraftitaliarewards.gui.GuiManager;
+import me.fabrimat.minecraftitaliarewards.message.MessageManager;
+import me.fabrimat.minecraftitaliarewards.remote.RemoteManager;
+import me.fabrimat.minecraftitaliarewards.sound.SoundManager;
 import me.fabrimat.minecraftitaliarewards.vote.VotesManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -15,6 +18,9 @@ public class MinecraftItaliaRewards extends JavaPlugin {
     private GuiManager guiManager;
     private DatabaseManager databaseManager;
     private AnnounceManager announceManager;
+    private RemoteManager remoteManager;
+    private SoundManager soundManager;
+    private MessageManager messageManager;
 
     @Override
     public void onEnable() {
@@ -26,6 +32,9 @@ public class MinecraftItaliaRewards extends JavaPlugin {
 
         this.votesManager = new VotesManager(this);
         this.announceManager = new AnnounceManager(this);
+        this.messageManager = new MessageManager(this);
+        this.soundManager = new SoundManager(this);
+        this.remoteManager = new RemoteManager(this);
 
     }
 
@@ -56,5 +65,17 @@ public class MinecraftItaliaRewards extends JavaPlugin {
 
     public DatabaseManager getDatabaseManager() {
         return databaseManager;
+    }
+
+    public SoundManager getSoundManager() {
+        return soundManager;
+    }
+
+    public MessageManager getMessageManager() {
+        return messageManager;
+    }
+
+    public RemoteManager getRemoteManager() {
+        return remoteManager;
     }
 }
