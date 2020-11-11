@@ -11,13 +11,15 @@ public abstract class Config {
 
     protected YamlConfiguration config;
     protected final MinecraftItaliaRewards plugin;
+    protected final String fileName;
 
     public Config(MinecraftItaliaRewards plugin, String fileName) {
         this.plugin = plugin;
-        createCustomConfig(fileName);
+        this.fileName = fileName;
+        createCustomConfig();
     }
 
-    protected void createCustomConfig(String fileName) {
+    protected void createCustomConfig() {
         File customConfigFile = new File(plugin.getDataFolder(), fileName);
         if (!customConfigFile.exists()) {
             customConfigFile.getParentFile().mkdirs();
@@ -32,7 +34,9 @@ public abstract class Config {
         }
     }
 
-    abstract public void reload();
+    public void reload() {
+        createCustomConfig();
+    };
 
     public String getString(String path) {
         String value = config.getString(path);

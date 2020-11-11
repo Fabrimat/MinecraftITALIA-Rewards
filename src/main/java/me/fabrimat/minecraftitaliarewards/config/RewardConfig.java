@@ -13,11 +13,6 @@ public class RewardConfig extends Config {
         super(plugin, "rewards.yml");
     }
 
-    @Override
-    public void reload() {
-
-    }
-
     public List<Reward> getRewards() {
         List<Reward> rewards = new ArrayList<>();
         ConfigurationSection rewardSection = config.getConfigurationSection("rewards");
