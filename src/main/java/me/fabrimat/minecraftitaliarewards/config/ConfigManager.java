@@ -1,5 +1,6 @@
 package me.fabrimat.minecraftitaliarewards.config;
 
+import me.fabrimat.minecraftitaliarewards.interfaces.Manager;
 import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -9,7 +10,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConfigManager {
+public class ConfigManager implements Manager {
 
     private final YamlConfiguration config;
     private final MinecraftItaliaRewards plugin;
@@ -51,8 +52,18 @@ public class ConfigManager {
         this.loadConfig();
     }
 
+    @Override
+    public void reload() {
+
+    }
+
+    @Override
+    public void disable() {
+
+    }
+
     private void loadConfig() {
-        this.databaseType = config.getString("database-type", "sqlite").toLowerCase();
+        this.databaseType = config.getString("database-type", "SQLITE").toUpperCase();
         this.mySQLAddress = config.getString("database-type", "localhost:3306");
         this.mySQLUser = config.getString("database-type", "mcitarewards");
         this.mySQLPassword = config.getString("database-type", "mcitarewards");

@@ -1,5 +1,6 @@
 package me.fabrimat.minecraftitaliarewards;
 
+import me.fabrimat.minecraftitaliarewards.announce.AnnounceManager;
 import me.fabrimat.minecraftitaliarewards.config.ConfigManager;
 import me.fabrimat.minecraftitaliarewards.database.DatabaseManager;
 import me.fabrimat.minecraftitaliarewards.gui.GuiManager;
@@ -13,6 +14,7 @@ public class MinecraftItaliaRewards extends JavaPlugin {
     private ConfigManager configManager;
     private GuiManager guiManager;
     private DatabaseManager databaseManager;
+    private AnnounceManager announceManager;
 
     @Override
     public void onEnable() {
@@ -23,14 +25,17 @@ public class MinecraftItaliaRewards extends JavaPlugin {
         this.guiManager = new GuiManager(this);
 
         this.votesManager = new VotesManager(this);
-        this.votesManager.startRunner();
+        this.announceManager = new AnnounceManager(this);
 
     }
 
     @Override
     public void onDisable() {
-        this.guiManager.getGui().close();
-        this.votesManager.stopRunner();
+        this.guiManager.disable();
+        this.votesManager.disable();
+        this.databaseManager.disable();
+        this.configManager.disable();
+        this.announceManager.disable();
     }
 
     public static MinecraftItaliaRewards getInstance() {

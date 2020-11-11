@@ -1,5 +1,6 @@
 package me.fabrimat.minecraftitaliarewards.database;
 
+import me.fabrimat.minecraftitaliarewards.interfaces.Manager;
 import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
 
 import java.sql.Connection;
@@ -8,23 +9,33 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
-public class DatabaseManager {
+public class DatabaseManager implements Manager {
 
     private final MinecraftItaliaRewards plugin;
 
-    private final Database database;
+    private Database database;
 
     public DatabaseManager(MinecraftItaliaRewards plugin) {
         this.plugin = plugin;
+        this.reload();
+    }
+
+    @Override
+    public void reload() {
         switch (plugin.getConfigManager().getDatabaseType()) {
-            case "mysql":
+            case "MYSQL":
                 this.database = new MySQL(plugin);
                 break;
-            case "sqlite":
+            case "SQLITE":
             default:
                 this.database = new SQLite(plugin);
                 break;
         }
+    }
+
+    @Override
+    public void disable() {
+
     }
 
     public boolean isPlayerInVotes(String UUID) {

@@ -5,6 +5,7 @@ import me.fabrimat.minecraftitaliarewards.config.ConfigManager;
 import me.fabrimat.minecraftitaliarewards.database.DatabaseManager;
 import me.fabrimat.minecraftitaliarewards.gui.GuiManager;
 import me.fabrimat.minecraftitaliarewards.votes.VotesManager;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,12 +13,15 @@ import org.bukkit.entity.Player;
 
 public class RewardCommand implements CommandExecutor {
 
+    private final MinecraftItaliaRewards plugin;
+
     private final VotesManager votesManager;
     private final GuiManager guiManager;
     private final ConfigManager configManager;
     private final DatabaseManager databaseManager;
 
     public RewardCommand(MinecraftItaliaRewards plugin) {
+        this.plugin = plugin;
         this.votesManager = plugin.getVotesManager();
         this.guiManager = plugin.getGuiManager();
         this.configManager = plugin.getConfigManager();
@@ -42,17 +46,20 @@ public class RewardCommand implements CommandExecutor {
                 sender.sendMessage("c");
                 break;
             case ACQUIRED:
-                if (!databaseManager.isPlayerInVotes(((Player) sender).getUniqueId().toString())) {
-                    if(votesManager.getVotes() >= configManager.getMinVotes()) {
-                        sender.sendMessage("d"); // OK
-                        guiManager.getGui().open((Player) sender);
+                Bukkit.getScheduler().runTask(plugin, () -> {
+                    if (!databaseManager.isPlayerInVotes(((Player) sender).getUniqueId().toString())) {
+                        Bukkit.getScheduler().runTask(plugin, () -> {
+                            if(votesManager.isRewardDay()) {
+                                sender.sendMessage("d"); // OK
+                                guiManager.getGui().open((Player) sender);
+                            } else {
+                                sender.sendMessage("e"); // Not enough votes
+                            }
+                        });
                     } else {
-                        sender.sendMessage("e"); // Not enough votes
+                        Bukkit.getScheduler().runTask(plugin, () -> sender.sendMessage("")); // Already claimed
                     }
-                } else {
-                    sender.sendMessage(""); // Already claimed
-                }
-
+                });
                 break;
         }
 

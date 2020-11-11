@@ -1,19 +1,13 @@
 package me.fabrimat.minecraftitaliarewards.votes;
 
 import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
+import me.fabrimat.minecraftitaliarewards.interfaces.SchedulerManager;
 import me.fabrimat.minecraftitaliarewards.config.ConfigManager;
-import me.fabrimat.minecraftitaliarewards.config.Reward;
-import me.fabrimat.minecraftitaliarewards.gui.Gui;
 import me.fabrimat.minecraftitaliarewards.remote.RemoteQuery;
-import org.bukkit.Bukkit;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-public class VotesManager {
+public class VotesManager implements SchedulerManager {
 
     private final MinecraftItaliaRewards plugin;
     private final ConfigManager configManager;
@@ -26,6 +20,15 @@ public class VotesManager {
         this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
         this.voteCheckRunner = new VoteCheckRunner(plugin);
+        startRunner();
+    }
+
+    @Override
+    public void reload() {}
+
+    @Override
+    public void disable() {
+        this.stopRunner();
     }
 
     public VoteStatus getStatus() {
@@ -47,14 +50,21 @@ public class VotesManager {
         loadDate = LocalDate.now();
     }
 
+    public boolean isRewardDay() {
+        return getVotes() >= configManager.getMinVotes();
+    }
+
+    @Override
     public void forceRun() {
         this.voteCheckRunner.runTaskAsynchronously(this.plugin);
     }
 
+    @Override
     public void startRunner() {
-        this.voteCheckRunner.runTaskTimerAsynchronously(this.plugin, 1L, 1L);
+        this.voteCheckRunner.runTaskTimerAsynchronously(this.plugin, 800L, 10000L);
     }
 
+    @Override
     public void stopRunner() {
         if(!this.voteCheckRunner.isCancelled()) {
             this.voteCheckRunner.cancel();

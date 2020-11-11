@@ -1,5 +1,6 @@
 package me.fabrimat.minecraftitaliarewards.gui;
 
+import me.fabrimat.minecraftitaliarewards.interfaces.Manager;
 import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
 import me.fabrimat.minecraftitaliarewards.config.ConfigManager;
 import me.fabrimat.minecraftitaliarewards.config.Reward;
@@ -8,11 +9,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuiManager {
+public class GuiManager implements Manager {
 
     private final ConfigManager configManager;
     private final DatabaseManager databaseManager;
@@ -24,12 +24,18 @@ public class GuiManager {
         this.reload();
     }
 
+    @Override
     public void reload() {
         if(this.gui != null) {
             this.gui.close();
         }
         this.gui = new Gui();
         this.loadGui();
+    }
+
+    @Override
+    public void disable() {
+
     }
 
     private void loadGui() {

@@ -1,7 +1,5 @@
 package me.fabrimat.minecraftitaliarewards.gui;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import me.fabrimat.minecraftitaliarewards.gui.events.GuiClickEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -32,7 +30,6 @@ public class Gui {
         this.title = title;
     }
 
-    @NotNull
     public List<Player> getPlayers() {
         return inventory == null ? Collections.emptyList()
                 : inventory.getViewers().stream()
@@ -55,7 +52,7 @@ public class Gui {
         }
     }
 
-    public void addButton(int slot, @Nullable ItemStack item, @Nullable Clickable clickable) {
+    public void addButton(int slot, ItemStack item, Clickable clickable) {
         this.addItem(slot, item);
         this.buttons.put(slot, clickable);
     }
@@ -82,7 +79,7 @@ public class Gui {
         player.openInventory(inventory);
     }
 
-    public void onClick(@NotNull Player player, @NotNull InventoryClickEvent event) {
+    public void onClick(Player player, InventoryClickEvent event) {
         final int cell = event.getSlot();
         this.buttons.get(cell).onClick(new GuiClickEvent(this, player, event, cell));
     }
