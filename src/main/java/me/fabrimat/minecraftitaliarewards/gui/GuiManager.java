@@ -35,7 +35,7 @@ public class GuiManager implements Manager {
 
     @Override
     public void disable() {
-
+        this.gui.close();
     }
 
     private void loadGui() {
@@ -63,6 +63,7 @@ public class GuiManager implements Manager {
                 }
             });
         }
+        this.gui.createInventory();
     }
     public Gui getGui() {
         return gui;
