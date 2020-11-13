@@ -1,9 +1,12 @@
 package me.fabrimat.minecraftitaliarewards;
 
 import me.fabrimat.minecraftitaliarewards.announce.AnnounceManager;
+import me.fabrimat.minecraftitaliarewards.commands.McItaCommand;
+import me.fabrimat.minecraftitaliarewards.commands.RewardCommand;
 import me.fabrimat.minecraftitaliarewards.config.ConfigManager;
 import me.fabrimat.minecraftitaliarewards.database.DatabaseManager;
 import me.fabrimat.minecraftitaliarewards.gui.GuiManager;
+import me.fabrimat.minecraftitaliarewards.gui.listener.InventoryListener;
 import me.fabrimat.minecraftitaliarewards.message.MessageManager;
 import me.fabrimat.minecraftitaliarewards.remote.RemoteManager;
 import me.fabrimat.minecraftitaliarewards.sound.SoundManager;
@@ -35,6 +38,14 @@ public class MinecraftItaliaRewards extends JavaPlugin {
         this.messageManager = new MessageManager(this);
         this.soundManager = new SoundManager(this);
         this.remoteManager = new RemoteManager(this);
+
+        this.votesManager.reload();
+        this.guiManager.reload();
+
+        // TODO Move listeners and commands in their package
+        getServer().getPluginManager().registerEvents(new InventoryListener(), this);
+        getCommand("premio").setExecutor(new RewardCommand(this));
+        getCommand("mcita").setExecutor(new McItaCommand(this));
 
     }
 

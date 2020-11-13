@@ -46,7 +46,8 @@ public class RewardConfig extends Config {
             List<String> tempLore = tempConfig.getStringList("lore");
             List<String> tempCommands = tempConfig.getStringList("commands");
 
-            rewards.add(new Reward(tempMaterial, tempName, tempAmount, incLin, incEsp, getDouble("average"), tempMaxAmount, plugin.getVotesManager().getValue(), tempPosition, tempRepeat, tempEnchant, tempLore, tempCommands));
+            rewards.add(new Reward(tempMaterial, tempName, tempAmount, incLin, incEsp, getDouble("average"),
+                    tempMaxAmount, plugin.getVotesManager().getValue(), tempPosition, tempRepeat, tempEnchant, tempLore, tempCommands));
             i++;
         }
         return rewards;

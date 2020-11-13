@@ -40,27 +40,31 @@ public class RewardCommand implements CommandExecutor {
 
         switch (votesManager.getStatus()) {
             case ERROR:
-                sender.sendMessage("a");
+                messageManager.sendMessage(sender, true, configManager.getMessageConfig().getString("vote-error"));
                 break;
             case FAILURE:
-                sender.sendMessage("b");
+                messageManager.sendMessage(sender, true, configManager.getMessageConfig().getString("limit-exceeded"));
                 break;
             case WAITING:
-                sender.sendMessage("c");
+                messageManager.sendMessage(sender, true, configManager.getMessageConfig().getString("waiting-for-server"));
                 break;
             case ACQUIRED:
                 Bukkit.getScheduler().runTask(plugin, () -> {
                     if (!databaseManager.isPlayerInVotes(((Player) sender).getUniqueId().toString())) {
                         Bukkit.getScheduler().runTask(plugin, () -> {
                             if(votesManager.isRewardDay()) {
-                                sender.sendMessage("d"); // OK
                                 guiManager.getGui().open((Player) sender);
                             } else {
-                                sender.sendMessage("e"); // Not enough votes
+                                messageManager.sendMessage(sender, true, configManager.getMessageConfig().getString("not-enough-votes"));
                             }
                         });
                     } else {
-                        Bukkit.getScheduler().runTask(plugin, () -> sender.sendMessage("")); // Already claimed
+                        Bukkit.getScheduler().runTask(plugin, () ->
+                                messageManager.sendMessage(
+                                        sender,
+                                        true,
+                                        configManager.getMessageConfig()
+                                                .getString("already-claimed")));
                     }
                 });
                 break;

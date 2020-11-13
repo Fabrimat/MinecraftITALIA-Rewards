@@ -5,6 +5,6 @@ mysql:
   password: 'mcitarewards'
   database: 'mcitarewards'
   table_prefix: 'mir_'
-servername: slimecraft
+server-name: slimecraft
 ticks-announcer: 24000
 ticks-checker: 6000

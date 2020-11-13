@@ -34,6 +34,7 @@ public class DatabaseManager implements Manager {
                 this.database = new SQLite(plugin);
                 break;
         }
+        this.database.load();
     }
 
     @Override

@@ -1,7 +1,7 @@
 min-votes: 30
 average-votes: 25
-gui-size: 18
-max-votes-limit: 50
+gui-rows: 3
+max-value: 50
 rewards:
   '1':
     icon-ID: DIAMOND

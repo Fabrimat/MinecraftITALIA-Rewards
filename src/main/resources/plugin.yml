@@ -1,4 +1,4 @@
-main: me.fabrimat.MinecraftItaliaRewards.MinecraftItaliaRewards
+main: me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards
 name: MinecraftItaliaRewards
 version: '${project.version}'
 author: Fabrimat
@@ -9,6 +9,11 @@ commands:
     permission: mcita.reward
     permission-message: You do not have permission!
     usage: /premio
+  mcita:
+    description: Comando per gestire il plugin
+    permission: mcita.admin
+    permission-message: You do not have permission!
+    usage: /mcita
 permissions:
   mcita.reward:
     description: Permette di ricevere il premio

@@ -21,7 +21,6 @@ public class GuiManager implements Manager {
     public GuiManager(MinecraftItaliaRewards plugin) {
         this.configManager = plugin.getConfigManager();
         this.databaseManager = plugin.getDatabaseManager();
-        this.reload();
     }
 
     @Override
@@ -35,7 +34,9 @@ public class GuiManager implements Manager {
 
     @Override
     public void disable() {
-        this.gui.close();
+        if(this.gui != null) {
+            this.gui.close();
+        }
     }
 
     private void loadGui() {

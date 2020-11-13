@@ -37,13 +37,7 @@ public class RemoteManager implements Manager {
         position = 0;
         votesTotal = 0;
         votesYesterday = 0;
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-            try {
-                update();
-            } catch (PrimaryThreadException e) {
-                e.printStackTrace();
-            }
-        });
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, this::update);
     }
 
     @Override
@@ -55,8 +49,9 @@ public class RemoteManager implements Manager {
         }
         
         try {
-            URL url = new URL("https://www.minecraft-italia.it/v5/server-info/" +
-                    configManager.getRewardConfig().getString("server-name"));
+            URL url = new URL("https://api.minecraft-italia.it/v5/server-info/" +
+                    configManager.getMainConfig().getString("server-name"));
+            Bukkit.broadcastMessage(url.toString());
             HttpsURLConnection con = (HttpsURLConnection)url.openConnection();
             HttpsURLConnection.setFollowRedirects(true);
             con.setConnectTimeout(15 * 1000);
@@ -80,24 +75,25 @@ public class RemoteManager implements Manager {
         return null;
     }
 
-    public void update() throws PrimaryThreadException {
+    public void update() {
         JsonObject obj = new JsonObject();
-        String response = httpsRequest();
         boolean success;
-        if(response != null) {
-            try {
-                obj = (JsonObject) new JsonParser().parse(httpsRequest());
+        try {
+            String response = httpsRequest();
+            if(response != null) {
+                obj = (JsonObject) new JsonParser().parse(response);
                 success = true;
-            } catch (JsonSyntaxException | PrimaryThreadException e) {
-                e.printStackTrace();
+            } else {
                 success = false;
             }
-        } else {
+        } catch (JsonSyntaxException | PrimaryThreadException e) {
+            e.printStackTrace();
             success = false;
         }
         boolean finalSuccess = success;
         JsonObject finalObj = obj;
         Bukkit.getScheduler().runTask(plugin, () -> {
+            Bukkit.broadcastMessage(""+ finalSuccess);
             this.success = finalSuccess;
             if(finalSuccess) {
                 position = finalObj.getAsJsonPrimitive("position").getAsInt();

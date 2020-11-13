@@ -29,10 +29,6 @@ public abstract class Database {
             rs = ps.executeQuery();
             close(ps,rs);
 
-            ps = connection.prepareStatement("SELECT * FROM votes;");
-            rs = ps.executeQuery();
-            close(ps,rs);
-
         } catch (SQLException ex) {
             plugin.getLogger().log(Level.SEVERE, "Unable to retreive connection", ex);
         }
