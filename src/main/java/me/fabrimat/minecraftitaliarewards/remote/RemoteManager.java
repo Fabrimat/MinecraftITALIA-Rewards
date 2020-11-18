@@ -51,7 +51,6 @@ public class RemoteManager implements Manager {
         try {
             URL url = new URL("https://api.minecraft-italia.it/v5/server-info/" +
                     configManager.getMainConfig().getString("server-name"));
-            Bukkit.broadcastMessage(url.toString());
             HttpsURLConnection con = (HttpsURLConnection)url.openConnection();
             HttpsURLConnection.setFollowRedirects(true);
             con.setConnectTimeout(15 * 1000);
@@ -93,7 +92,6 @@ public class RemoteManager implements Manager {
         boolean finalSuccess = success;
         JsonObject finalObj = obj;
         Bukkit.getScheduler().runTask(plugin, () -> {
-            Bukkit.broadcastMessage(""+ finalSuccess);
             this.success = finalSuccess;
             if(finalSuccess) {
                 position = finalObj.getAsJsonPrimitive("position").getAsInt();

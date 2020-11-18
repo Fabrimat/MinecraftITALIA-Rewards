@@ -23,7 +23,7 @@ public class RewardConfig extends Config {
         while(rewardSection != null && (tempConfig = rewardSection.getConfigurationSection(Integer.toString(i))) != null) {
             Material tempMaterial = Material.matchMaterial(tempConfig.getString("icon-ID"));
             if(tempMaterial == null) {
-                System.out.println("Unknown material: " + tempConfig.getString("icon-ID"));
+                System.out.println("Unknown material: " + tempConfig.getString("icon-ID")); // TODO use logger
                 tempMaterial = Material.DIRT;
             }
             String tempName = TextUtils.parseTextColor(tempConfig.getString("gui-name"));
