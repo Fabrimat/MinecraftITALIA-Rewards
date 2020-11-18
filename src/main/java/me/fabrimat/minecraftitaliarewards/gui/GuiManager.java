@@ -5,6 +5,7 @@ import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
 import me.fabrimat.minecraftitaliarewards.config.ConfigManager;
 import me.fabrimat.minecraftitaliarewards.config.Reward;
 import me.fabrimat.minecraftitaliarewards.database.DatabaseManager;
+import me.fabrimat.minecraftitaliarewards.utility.TextUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -41,7 +42,7 @@ public class GuiManager implements Manager {
 
     private void loadGui() {
         this.gui.setRows(configManager.getRewardConfig().getInt("gui-rows"));
-        this.gui.setTitle(configManager.getRewardConfig().getString("gui-title"));
+        this.gui.setTitle(TextUtils.parseTextColor(configManager.getRewardConfig().getString("gui-title")));
         for(Reward reward : configManager.getRewardConfig().getRewards()) {
             ItemStack guiItem = new ItemStack(reward.getIcon());
             ItemMeta meta = guiItem.getItemMeta();

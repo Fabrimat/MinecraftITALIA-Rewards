@@ -2,6 +2,7 @@ min-votes: 30
 average-votes: 25
 gui-rows: 3
 max-value: 50
+gui-title: "&cScegli il tuo premio!"
 rewards:
   '1':
     icon-ID: DIAMOND
