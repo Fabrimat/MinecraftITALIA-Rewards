@@ -7,4 +7,4 @@ mysql:
   table_prefix: 'mir_'
 server-name: slimecraft
 ticks-announcer: 24000
-ticks-checker: 6000
+ticks-checker: 12000
