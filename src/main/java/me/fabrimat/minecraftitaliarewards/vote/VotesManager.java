@@ -1,7 +1,6 @@
 package me.fabrimat.minecraftitaliarewards.vote;
 
 import me.fabrimat.minecraftitaliarewards.MinecraftItaliaRewards;
-import me.fabrimat.minecraftitaliarewards.exception.PrimaryThreadException;
 import me.fabrimat.minecraftitaliarewards.manager.SchedulerManager;
 import me.fabrimat.minecraftitaliarewards.config.ConfigManager;
 import me.fabrimat.minecraftitaliarewards.remote.RemoteManager;
@@ -43,7 +42,7 @@ public class VotesManager implements SchedulerManager {
         if(loadDate != null && LocalDate.now().isEqual(loadDate)) {
             if(value >= 0) {
                 if(value > configManager.getRewardConfig().getInt("max-value")) {
-                    // TODO error message
+                    // TODO error message in console
                     return VoteStatus.ERROR;
                 }
                 return VoteStatus.ACQUIRED;
@@ -75,23 +74,34 @@ public class VotesManager implements SchedulerManager {
 
     @Override
     public void forceRun() {
-        this.voteCheckRunner.runTaskAsynchronously(this.plugin);
+        if(this.voteCheckRunner != null) {
+            this.voteCheckRunner.runTaskAsynchronously(this.plugin);
+        } else {
+            throw new IllegalStateException();
+        }
     }
 
     @Override
     public void startRunner() {
-        this.voteCheckRunner.runTaskTimerAsynchronously(this.plugin, 100L, 100L);
+        if(this.voteCheckRunner != null) {
+            this.voteCheckRunner.runTaskTimerAsynchronously(
+                    this.plugin,
+                    100L,
+                    this.configManager.getMainConfig().getLong("ticks-checker", 12000L));
+        } else {
+            throw new IllegalStateException();
+        }
     }
 
     @Override
     public void stopRunner() {
-        if(!this.voteCheckRunner.isCancelled()) {
+        if(this.voteCheckRunner != null && !this.voteCheckRunner.isCancelled()) {
             this.voteCheckRunner.cancel();
         }
     }
 
     public boolean isRunnerActive() {
-        return !this.voteCheckRunner.isCancelled();
+        return this.voteCheckRunner != null && !this.voteCheckRunner.isCancelled();
     }
 
     public int getValue() {

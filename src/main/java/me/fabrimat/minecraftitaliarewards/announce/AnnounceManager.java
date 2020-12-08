@@ -9,42 +9,55 @@ public class AnnounceManager implements SchedulerManager {
     private final MinecraftItaliaRewards plugin;
     private final ConfigManager configManager;
 
-    private final AnnounceRunner announceRunner;
+    private AnnounceRunner announceRunner;
 
     public AnnounceManager(MinecraftItaliaRewards plugin) {
         this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
+        this.reload();
+    }
+
+    @Override
+    public void reload() {
+        this.stopRunner();
         this.announceRunner = new AnnounceRunner(plugin);
         this.startRunner();
     }
 
     @Override
-    public void reload() {}
-
-    @Override
     public void disable() {
-        this.stopRunner();
     }
 
     @Override
     public void forceRun() {
-        this.announceRunner.runTaskAsynchronously(this.plugin);
+        if(this.announceRunner != null) {
+            this.announceRunner.runTaskAsynchronously(this.plugin);
+        } else {
+            throw new IllegalStateException();
+        }
     }
 
     @Override
     public void startRunner() {
-        this.announceRunner.runTaskTimerAsynchronously(this.plugin, 800L, 10000L);
+        if(this.announceRunner != null) {
+            this.announceRunner.runTaskTimerAsynchronously(
+                    this.plugin,
+                    300L,
+                    configManager.getMainConfig().getLong("ticks-announcer", 24000L));
+        } else {
+            throw new IllegalStateException();
+        }
     }
 
     @Override
     public void stopRunner() {
-        if(!this.announceRunner.isCancelled()) {
+        if(this.announceRunner != null && !this.announceRunner.isCancelled()) {
             this.announceRunner.cancel();
         }
     }
 
     public boolean isRunnerActive() {
-        return !this.announceRunner.isCancelled();
+        return this.announceRunner != null && !this.announceRunner.isCancelled();
     }
 
 }
