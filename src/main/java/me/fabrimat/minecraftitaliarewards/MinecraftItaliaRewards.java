@@ -42,7 +42,6 @@ public class MinecraftItaliaRewards extends JavaPlugin {
         this.votesManager.reload();
         this.guiManager.reload();
 
-        // TODO Move listeners and commands in their package
         getServer().getPluginManager().registerEvents(new InventoryListener(), this);
         getCommand("premio").setExecutor(new RewardCommand(this));
         getCommand("mcita").setExecutor(new McItaCommand(this));
@@ -56,6 +55,17 @@ public class MinecraftItaliaRewards extends JavaPlugin {
         this.databaseManager.disable();
         this.configManager.disable();
         this.announceManager.disable();
+    }
+
+    public void reload() {
+        this.configManager.reload();
+        this.databaseManager.reload();
+        this.announceManager.reload();
+        this.messageManager.reload();
+        this.soundManager.reload();
+        this.remoteManager.reload();
+        this.votesManager.reload();
+        this.guiManager.reload();
     }
 
     public static MinecraftItaliaRewards getInstance() {
